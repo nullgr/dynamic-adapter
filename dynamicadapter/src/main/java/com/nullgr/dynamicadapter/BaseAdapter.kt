@@ -48,8 +48,15 @@ open class BaseAdapter @Inject constructor(delegatesFactory: AdapterDelegatesFac
 
     fun getItemPosition(listItem: ListItem): Int = items.indexOf(listItem)
 
-    fun updateData(newItems: List<ListItem>) {
-        differenceCalculator.calculateDiff(this, items, newItems).subscribe()
+    fun updateData(newItems: List<ListItem>, enableDiffUtils: Boolean = true) {
+        when (enableDiffUtils) {
+            true -> differenceCalculator.calculateDiff(this, items, newItems).subscribe()
+            else -> {
+                setData(newItems)
+                notifyDataSetChanged()
+            }
+        }
+
     }
 
     fun setData(newItems: List<ListItem>) {
@@ -102,7 +109,7 @@ open class BaseAdapter @Inject constructor(delegatesFactory: AdapterDelegatesFac
 
     fun getItem(position: Int): ListItem? {
         return when {
-            !items.isEmpty() && position > 0 -> items[position]
+            !items.isEmpty() && position >= 0 -> items[position]
             else -> null
         }
     }
