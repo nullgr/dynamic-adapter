@@ -28,13 +28,13 @@ abstract class AdapterDelegate {
                               payloads: List<Any>) {
     }
 
-    fun onViewRecycled(holder: RecyclerView.ViewHolder) {}
+    open fun onViewRecycled(holder: RecyclerView.ViewHolder) {}
 
-    fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
+    open fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
         return false
     }
 
-    fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {}
+    open fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {}
 
-    fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {}
+    open fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {}
 }
